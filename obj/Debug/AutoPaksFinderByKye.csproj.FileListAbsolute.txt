@@ -1,9 +1,0 @@
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\bin\Debug\AutoPaksFinderByKye.exe.config
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\bin\Debug\AutoPaksFinderByKye.exe
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\bin\Debug\AutoPaksFinderByKye.pdb
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.Form1.resources
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.Properties.Resources.resources
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.csproj.GenerateResource.cache
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.csproj.CoreCompileInputs.cache
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.exe
-C:\Users\ProMa\source\repos\AutoPaksFinderByKye\obj\Debug\AutoPaksFinderByKye.pdb

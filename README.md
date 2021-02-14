@@ -44,7 +44,7 @@ namespace AutoPaksFinderByKye
                     datfile = "";
 
 
-
+                string errormsg = "Could not find your pak files!";
                 if (datfile != "")
                 {
                     try
@@ -58,13 +58,13 @@ namespace AutoPaksFinderByKye
                     }
                     catch
                     {
-                        MessageBox.Show("Could not find your pak files! Please select them manually!", "Pro Swapper", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(errormsg);
                         return "";
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Could not find your pak files! Please select them manually!", "Pro Swapper", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(errormsg);
                     return "";
                 }
             }
