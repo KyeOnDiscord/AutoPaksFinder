@@ -1,74 +1,57 @@
 # AutoPaksFinder
 Gets your Fortnite Paks Folder Automatically using the LauncherInstalled.dat file
 
-
-Basically boils down to this:
-
-Make sure to add System.Web.Extensions as a reference
+Make sure to add the nuget [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
 
 ```csharp
 using System;
-using System.Windows.Forms;
-using System.Web.Script.Serialization;
-using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
+using Newtonsoft.Json;
 namespace AutoPaksFinderByKye
 {
     static class Program
     {
         static void Main()
         {
-            MessageBox.Show("Your Paks are located at: " + PakFiles + @"\FortniteGame\Content\Paks");
+            Console.WriteLine("Your Paks are located at: " + GetPaksLocation());
+            Console.ReadLine();
         }
+        public static string GetPaksLocation()
+        {
+            string LauncherJson = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Epic\UnrealEngineLauncher\LauncherInstalled.dat";
+            if (File.Exists(LauncherJson))
+            {
+                try
+                {
+                    EpicGamesLauncher.Root launcherdata = JsonConvert.DeserializeObject<EpicGamesLauncher.Root>(File.ReadAllText(LauncherJson));
+                    string baseInstallLocation = launcherdata.InstallationList.First(x => x.AppName == "Fortnite").InstallLocation;
+                    return baseInstallLocation + @"\FortniteGame\Content\Paks";
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Paks folder could not be found: {ex.Message}");
+                }
+            }
+            return null;
+        }
+    }
+
+    class EpicGamesLauncher
+    {
         public class InstallationList
         {
             public string InstallLocation { get; set; }
-            public string AppName { get; set; }
+            public string NamespaceId { get; set; }
+            public string ItemId { get; set; }
+            public string ArtifactId { get; set; }
             public string AppVersion { get; set; }
+            public string AppName { get; set; }
         }
-
         public class Root
         {
-            public List<InstallationList> InstallationList { get; set; }
-        }
-        public static string PakFiles
-        {
-            get
-            {
-                string datfile = "";
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\Epic\UnrealEngineLauncher\LauncherInstalled.dat";
-                if (File.Exists(path))
-                    datfile = path;
-                else
-                    datfile = "";
-
-
-                string errormsg = "Could not find your pak files!";
-                if (datfile != "")
-                {
-                    try
-                    {
-                        foreach (var d in new JavaScriptSerializer().Deserialize<Root>(File.ReadAllText(datfile)).InstallationList)
-                        {
-                            if (d.AppName == "Fortnite")
-                                return d.InstallLocation;
-                        }
-                        return "";
-                    }
-                    catch
-                    {
-                        MessageBox.Show(errormsg);
-                        return "";
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(errormsg);
-                    return "";
-                }
-            }
-            
+            public InstallationList[] InstallationList { get; set; }
         }
     }
 }
